@@ -9,16 +9,19 @@ gem "jquery-rails"
 gem "turbolinks"
 gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
-gem "unicorn"
+gem "puma"
 gem "capistrano-rails", group: :development
 # gem "bcrypt", "~> 3.1.7"
 # gem "therubyracer", platforms: :ruby
 
-group :development, :test do
-  gem "pry-byebug"
-end
-
 group :development do
   gem "web-console", "~> 2.0"
   gem "spring"
+end
+
+group :development, :test do
+  gem "rspec-rails", "~> 3.0"
+  gem "capybara"
+  gem "pry-byebug"
+  gem "faker"
 end

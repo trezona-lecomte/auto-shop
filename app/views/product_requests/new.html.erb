@@ -1,0 +1,9 @@
+<%= form_for @product_request do |f| %>
+  <div class="field">
+    <%= f.label :product_name %>
+    <%= f.text_field :product_name %>
+  </div>
+  <div class="button">
+    <%= f.submit "Show me the best prices!" %>
+  </div>
+<% end %>
