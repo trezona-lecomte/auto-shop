@@ -1,7 +1,7 @@
 require "rails_helper"
 
 feature "Enter product name" do
-  scenario "User enters a product name on the home page" do
+  scenario "Anonymous user enters a product name on the home page" do
     given_i_am_on_the_product_request_page
     and_i_enter_a_product_name
     when_i_click_the_enter_button
