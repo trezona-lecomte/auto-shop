@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
   let(:image_url) { Faker::Placeholdit.image("50x50") }
   let(:url)       { Faker::Internet.url }
 
-  describe "validations" do
+  describe "presence validations" do
     subject { User.new(user_params) }
 
     context "without a provider" do
