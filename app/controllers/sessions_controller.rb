@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
   def create
-    begin
-      @user = User.from_omniauth!(request.env["omniauth.auth"])
-      session[:user_id] = @user.id
+    service = FindOrCreateUserFromOauth.new(request.env["omniauth.auth"])
 
+    if service.call
+      @user = service.user
+      session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.name}"
-    rescue
-      flash[:warning] = "We ran into a problem while trying to authenticate you"
+    else
+      flash[:warning] = "We ran into a problem while trying to authenticate you: \n"
+                      + "#{service.errors.full_messages}"
     end
 
     redirect_to root_path

@@ -1,4 +1,4 @@
-class CreateOrFindUserFromOauth
+class FindOrCreateUserFromOauth
   extend Forwardable
   attr_reader :user, :errors, :auth_hash
 
