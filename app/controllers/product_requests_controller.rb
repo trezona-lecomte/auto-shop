@@ -1,4 +1,8 @@
 class ProductRequestsController < ApplicationController
+  def show
+    @product_request = ProductRequest.find(params[:id])
+  end
+
   def new
     @product_request = ProductRequest.new
   end
@@ -7,7 +11,7 @@ class ProductRequestsController < ApplicationController
     @product_request = ProductRequest.new(product_request_params)
 
     if @product_request.save
-
+      render "show", status: :created
     else
       render "new"
     end
