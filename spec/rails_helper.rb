@@ -38,6 +38,14 @@ twitter_omniauth_hash = {
     "urls" => {
       "Twitter" => Faker::Internet.url
     }
+  },
+  "credentials" => {
+    "token" => Faker::Bitcoin.address
+  },
+  "extra" => {
+    "raw_info" => {
+      "lang" => "en"
+    }
   }
 }
 OmniAuth.config.add_mock(:twitter, twitter_omniauth_hash)
