@@ -22,7 +22,9 @@
           <% end %>
 
           <ul class="nav navbar-nav">
-            <li><%= link_to("Sign in with Twitter", "/auth/twitter") %></li>
+            <% unless current_user %>
+              <li><%= link_to("Sign in with Twitter", "/auth/twitter") %></li>
+            <% end %>
           </ul>
         </div>
       </div>
