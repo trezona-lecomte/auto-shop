@@ -11,6 +11,12 @@ RSpec.describe User, type: :model do
   describe "presence validations" do
     subject { User.new(user_params) }
 
+    context "without a name" do
+      let(:name) { "" }
+
+      it { is_expected.to be_invalid }
+    end
+
     context "without a provider" do
       let(:provider) { "" }
 

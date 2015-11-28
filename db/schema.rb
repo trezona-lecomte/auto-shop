@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(version: 20151127074907) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",           null: false
-    t.string   "uid",                null: false
-    t.string   "name"
+    t.string   "provider",                          null: false
+    t.string   "uid",                               null: false
+    t.string   "name",                              null: false
     t.string   "email"
     t.string   "location"
     t.string   "image_url"
     t.string   "url"
     t.string   "token"
-    t.string   "preferred_language"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "preferred_language", default: "en"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
