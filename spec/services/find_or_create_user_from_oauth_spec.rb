@@ -12,9 +12,28 @@ RSpec.describe FindOrCreateUserFromOauth, type: :service do
       expect(service.call).to be true
     end
 
+    it "creates a new user" do
+      expect { service.call }.to change { User.count }.by(1)
+    end
+
     context "when the user doesn't yet exist" do
-      it "creates a new user" do
-        expect { service.call }.to change { User.count }.by(1)
+      let(:user) { User.last }
+      let(:info) { auth_hash["info"] }
+      let(:credentials) { auth_hash["credentials"] }
+      let(:raw_info) { auth_hash["extra"]["raw_info"] }
+
+      before { service.call }
+
+      it "saves the user's details" do
+        expect(user.provider)           .to eq(auth_hash["provider"])
+        expect(user.uid)                .to eq(auth_hash["uid"])
+        expect(user.name)               .to eq(info["name"])
+        expect(user.email)              .to eq(info["email"])
+        expect(user.location)           .to eq(info["location"])
+        expect(user.image_url)          .to eq(info["image"])
+        expect(user.url)                .to eq(info["urls"]["Twitter"])
+        expect(user.token)              .to eq(credentials["token"])
+        expect(user.preferred_language) .to eq(raw_info["lang"])
       end
     end
 
