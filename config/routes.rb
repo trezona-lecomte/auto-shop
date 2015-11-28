@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # Omniauth callback route:
   get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/failure",            to: "sessions#oauth_failure"
   delete "/sign_out",             to: "sessions#destroy"
 
   resources :product_requests, only: [:show, :new, :create]

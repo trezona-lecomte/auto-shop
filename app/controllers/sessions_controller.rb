@@ -7,8 +7,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.name}"
     else
-      flash[:warning] = "We ran into a problem while trying to authenticate you: \n"
-                      + "#{service.errors.full_messages}"
+      flash[:warning] = "Sorry, there was a problem: #{service.errors.messages}"
     end
 
     redirect_to root_path
@@ -21,6 +20,11 @@ class SessionsController < ApplicationController
       flash[:success] = "See you again soon!"
     end
 
+    redirect_to root_path
+  end
+
+  def oauth_failure
+    flash[:warning] = "Sorry, there was a problem: #{params[:message]}"
     redirect_to root_path
   end
 end
