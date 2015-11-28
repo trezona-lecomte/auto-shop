@@ -6,6 +6,7 @@ require "spec_helper"
 require "rspec/rails"
 require "capybara"
 require "faker"
+require "#{::Rails.root}/spec/helpers/omniauth_helpers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -28,31 +29,11 @@ ActiveRecord::Migration.maintain_test_schema!
 
 # Omniauth Test Configuration:
 OmniAuth.config.test_mode = true
-twitter_omniauth_hash = {
-  "provider" => "twitter",
-  "uid" => Faker::Number.number(20),
-  "info" => {
-    "name" => Faker::Name.name,
-    "location" => Faker::Address.city,
-    "image" => Faker::Placeholdit.image("50x50"),
-    "urls" => {
-      "Twitter" => Faker::Internet.url
-    }
-  },
-  "credentials" => {
-    "token" => Faker::Bitcoin.address
-  },
-  "extra" => {
-    "raw_info" => {
-      "lang" => "en"
-    }
-  }
-}
-OmniAuth.config.add_mock(:twitter, twitter_omniauth_hash)
 
 RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include Capybara::DSL
+  config.include OmniauthHelpers
 
   # Remove this line if you"re not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
