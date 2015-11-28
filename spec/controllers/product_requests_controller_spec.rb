@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ProductRequestsController, type: :controller do
   let(:product_request) {
