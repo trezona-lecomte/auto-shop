@@ -6,7 +6,7 @@ RSpec.describe FindOrCreateUserFromOauth, type: :service do
   let(:service) { FindOrCreateUserFromOauth.new(auth_hash) }
 
   context "when successful" do
-    let(:auth_hash) { twitter_auth_hash }
+    let(:auth_hash) { mock_auth_hash }
 
     it "returns true" do
       expect(service.call).to be true
@@ -34,7 +34,7 @@ RSpec.describe FindOrCreateUserFromOauth, type: :service do
 
         before do
           service.call
-          auth_hash = twitter_auth_hash(custom: { email: new_email })
+          auth_hash = mock_auth_hash(custom: { email: new_email })
           FindOrCreateUserFromOauth.new(auth_hash).call
         end
 
@@ -45,7 +45,7 @@ RSpec.describe FindOrCreateUserFromOauth, type: :service do
     end
 
     context "when some optional data isn't present" do
-      let(:auth_hash) { twitter_auth_hash(custom: { email: nil }) }
+      let(:auth_hash) { mock_auth_hash(custom: { email: nil }) }
 
       it "still creates the user" do
         expect { service.call }.to change { User.count }.by(1)
