@@ -1,3 +1,25 @@
+if $LOADED_FEATURES.grep(/spec\/spec_helper\.rb/).any?
+  begin
+    raise "foo"
+  rescue => e
+    puts <<-MSG
+  ===================================================
+  It looks like spec_helper.rb has been loaded
+  multiple times. Normalize the require to:
+
+    require "spec/spec_helper"
+
+  Things like File.join and File.expand_path will
+  cause it to be loaded multiple times.
+
+  Loaded this time from:
+
+    #{e.backtrace.join("\n    ")}
+  ===================================================
+    MSG
+  end
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -16,12 +38,12 @@ RSpec.configure do |config|
     # order dependency and want to debug it, you can fix the order by providing
     # the seed, which is printed after each run.
     #     --seed 1234
-    config.order = :random
+    # config.order = :random
 
     # Seed global randomization in this process using the `--seed` CLI option.
     # Setting this allows you to use `--seed` to deterministically reproduce
     # test failures related to randomization by passing the same `--seed` value
     # as the one that triggered the failure.
-    Kernel.srand config.seed
+    # Kernel.srand config.seed
   end
 end
