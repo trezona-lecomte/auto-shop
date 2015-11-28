@@ -14,7 +14,6 @@ class FindOrCreateUserFromOauth
       provider: auth_hash["provider"]
     )
     update_user_attributes
-    user.save
   end
 
   private
@@ -22,14 +21,21 @@ class FindOrCreateUserFromOauth
   def update_user_attributes
     info = auth_hash["info"]
 
-    user.update_attributes(
-      name: info["name"],
-      email: info["email"],
-      location: info["location"],
-      image_url: info["image"],
-      url: info["urls"]["Twitter"],
-      token: auth_hash["credentials"]["token"],
-      preferred_language: auth_hash["extra"]["raw_info"]["lang"]
-    )
+    unless user.update(
+         name: info["name"],
+         email: info["email"],
+         location: info["location"],
+         image_url: info["image"],
+         url: info["urls"]["Twitter"],
+         token: auth_hash["credentials"]["token"],
+         preferred_language: auth_hash["extra"]["raw_info"]["lang"]
+       )
+      Rails.logger.warn(
+        "Error updating user #{user.id} from auth hash: #{auth_hash}" +
+        "\n#{user.errors.full_messages}"
+      )
+    end
+
+    user.save
   end
 end
