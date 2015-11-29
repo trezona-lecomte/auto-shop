@@ -7,28 +7,7 @@ RSpec.describe User, type: :model do
   let(:location)  { Faker::Address.city }
   let(:image_url) { Faker::Placeholdit.image("50x50") }
   let(:url)       { Faker::Internet.url }
-
-  describe "presence validations" do
-    subject { User.new(user_params) }
-
-    context "without a name" do
-      let(:name) { "" }
-
-      it { is_expected.to be_invalid }
-    end
-
-    context "without a provider" do
-      let(:provider) { "" }
-
-      it { is_expected.to be_invalid }
-    end
-
-    context "without a uid" do
-      let(:uid) { "" }
-
-      it { is_expected.to be_invalid }
-    end
-  end
+  let(:token)     { Faker::Bitcoin.address }
 
   def user_params
     {
@@ -39,5 +18,24 @@ RSpec.describe User, type: :model do
       image_url: image_url,
       url:       url
     }
+  end
+
+  describe "presence validations" do
+    subject { User.new(user_params) }
+
+    context "without a name" do
+      let(:name) { "" }
+      it { is_expected.to be_invalid }
+    end
+
+    context "without a provider" do
+      let(:provider) { "" }
+      it { is_expected.to be_invalid }
+    end
+
+    context "without a uid" do
+      let(:uid) { "" }
+      it { is_expected.to be_invalid }
+    end
   end
 end

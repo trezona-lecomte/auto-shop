@@ -25,7 +25,7 @@ feature "Authentication" do
   end
 
   def then_i_should_see_a_welcome_message
-    expect(page).to have_content("Welcome to autoshop!")
+    expect(page).to have_content("Welcome to CV Bundler!")
   end
 
   def and_i_should_see_a_twitter_authentication_option
