@@ -6,7 +6,7 @@ require "spec_helper"
 require "rspec/rails"
 require "capybara"
 require "faker"
-require "#{::Rails.root}/spec/helpers/omniauth_helpers"
+require "#{::Rails.root}/spec/support/omniauth_helpers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
