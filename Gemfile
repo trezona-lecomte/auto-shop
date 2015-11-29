@@ -12,10 +12,6 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "puma"
 gem "capistrano-rails", group: :development
 gem "omniauth-twitter"
-gem "money-rails"
-gem "google_currency"
-# gem "bcrypt", "~> 3.1.7"
-# gem "therubyracer", platforms: :ruby
 
 group :development do
   gem "web-console", "~> 2.0"
@@ -24,6 +20,7 @@ end
 
 group :development, :test do
   gem "rspec-rails", "~> 3.0"
+  gem "spring-commands-rspec"
   gem "capybara"
   gem "pry-byebug"
   gem "faker"
