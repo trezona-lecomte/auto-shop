@@ -1,6 +1,10 @@
 class ProductRequestsController < ApplicationController
   def show
     @product_request = ProductRequest.find(params[:id])
+
+    if FetchOffers.new(@product_request).call
+      @offers = @product_request.offers
+    end
   end
 
   def new

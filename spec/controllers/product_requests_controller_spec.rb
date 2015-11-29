@@ -16,6 +16,7 @@ RSpec.describe ProductRequestsController, type: :controller do
 
     it { is_expected.to have_http_status(:ok) }
     it { is_expected.to render_template(:show) }
+    it { is_expected.to render_template(partial: "offer") }
   end
 
   describe "GET new" do

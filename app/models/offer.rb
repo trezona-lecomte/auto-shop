@@ -1,5 +1,5 @@
 class Offer < ActiveRecord::Base
-  belongs_to :product_request
+  belongs_to :product_request, inverse_of: :offers
 
   monetize :price_cents, with_model_currency: :currency,
                          numericality: { greater_than: 0 }
